@@ -4,14 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@font-face {
-  font-family: "Helvetica";
-  src: local("Helvetica"), local("Arial"), sans-serif;
-}
 
-.font-helvetica {
-  font-family: "Helvetica", Arial, sans-serif;
-}
 
 @theme inline {
   --color-background: var(--background);

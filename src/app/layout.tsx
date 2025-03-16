@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 // import { Geist, Geist_Mono } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
 
 // const geistSans = Geist({
@@ -11,6 +12,22 @@ import "./globals.css";
 //   variable: "--font-geist-mono",
 //   subsets: ["latin"],
 // });
+
+// const robotoSans = Roboto({
+//   variable: "--font-roboto-sans",
+//   subsets: ["latin"],
+//   weight: ["400", "700"], // Customize the font weights you need
+// });
+
+// const robotoMono = Roboto_Mono({
+//   variable: "--font-roboto-mono",
+//   subsets: ["latin"],
+//   weight: ["400", "700"],
+// });
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "700"], // Choose the weights you need
+});
 
 export const metadata: Metadata = {
   title: "Basa Finder",
@@ -27,7 +44,9 @@ export default function RootLayout({
     <html lang="en">
       <body
         // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        className="font-helvetica antialiased"
+        // className={`${robotoSans.variable} ${robotoMono.variable} antialiased`}
+        className={`${roboto.className} antialiased`}
+        // className="font-helvetica antialiased"
       >
         {children}
       </body>

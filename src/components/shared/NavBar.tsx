@@ -56,7 +56,7 @@ const Navbar = () => {
               <Link
                 key={route.href}
                 href={route.href}
-                className={`relative text-sm font-bold pb-1 tracking-wider transition-colors group ${
+                className={`relative  font-bold pb-1 tracking-wider transition-colors group ${
                   pathname === route.href
                     ? "text-[#e11d48]"
                     : "text-gray-700 hover:text-gray-900"
