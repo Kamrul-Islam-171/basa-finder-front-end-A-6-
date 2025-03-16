@@ -15,14 +15,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Logo from "./Logo";
+import { userRole } from "../modules/dashboard/sidebar/app-sidebar";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const pathname = usePathname();
 
+
   const routes = [
-    { name: "Dashboard", href: "/dashboard" },
+    { name: "Dashboard", href: `/${userRole}/dashboard` },
     { name: "Rental Listings", href: "/rental-listings" },
 
     { name: "About", href: "/about" },
@@ -38,7 +41,12 @@ const Navbar = () => {
               href="/"
               className="text-2xl font-bold text-gray-900 tracking-wider"
             >
-              BASA FINDER
+              <div className="flex gap-2 ">
+                <div className="w-[30px]">
+                  <Logo></Logo>
+                </div>
+                <span>Basa<span className="text-[var(--primary)]">Finder</span></span>
+              </div>
             </Link>
           </div>
 
@@ -96,14 +104,19 @@ const Navbar = () => {
               <DropdownMenuContent>
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="cursor-pointer">Profile</DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer">Dashboard</DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer"
-                  
+                <DropdownMenuItem className="cursor-pointer">
+                  Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">
+                  Dashboard
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className="cursor-pointer"
+
                   // onClick={handleLogout}
-                  >
-                    <LogOut></LogOut> Log Out
-                  </DropdownMenuItem>
+                >
+                  <LogOut></LogOut> Log Out
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
