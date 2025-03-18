@@ -22,6 +22,10 @@ import { useUser } from "@/context/UserContext";
 
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { rentalHouseValidation } from "./rentalFormValidation";
+import { CreateRentHouse } from "@/services/rentHouse";
+import { toast } from "sonner";
 
 const CLOUDINARY_CLOUD_NAME = 'dtp5fwvg9'; // Replace with your Cloudinary Cloud Name
 const UPLOAD_PRESET = 'myClouds'; // Replace with your Cloudinary Upload Preset
@@ -36,6 +40,7 @@ const UPLOAD_PRESET = 'myClouds'; // Replace with your Cloudinary Upload Preset
       imageUrls: [] as File[],
       amenities:""
     },
+    resolver: zodResolver(rentalHouseValidation)
   });
   const { user } = useUser();
   
@@ -70,14 +75,22 @@ const UPLOAD_PRESET = 'myClouds'; // Replace with your Cloudinary Upload Preset
       const RentHouseData = {
         location: data.location,
         description: data.description,
-        rentAmount: data.rentAmount,
-        noOfBedRooms: data.noOfBedRooms,
+        rentAmount: Number(data.rentAmount),
+        noOfBedRooms: Number(data.noOfBedRooms),
         imageUrls: uploadedImages,
         amenities:facilietes,
         email:user?.email
       }
 
-      console.log(RentHouseData)
+      // console.log(RentHouseData)
+      const res = await CreateRentHouse(RentHouseData);
+      console.log(res)
+      if(res?.success) {
+        toast.success(res?.message)
+      }
+      else {
+        toast.error(res?.message);
+      }
 
     } catch (error) {
       console.error(error);
@@ -268,15 +281,4 @@ const UPLOAD_PRESET = 'myClouds'; // Replace with your Cloudinary Upload Preset
 export default RentalForm;
 
 
-// {
-//   "location": "Dhaka, gulah",
-//   "amenities": ["wifi", "swimmingpool", "fan"],
-//   "description": "very good",
-//   "imageUrls": [
-//     "https://res.cloudinary.com/dtp5fwvg9/image/upload/v1742280120/mto0lpadnwbeznaf30lu.png",
-//     "https://res.cloudinary.com/dtp5fwvg9/image/upload/v1742280121/qcttdtw5jdqrqjv3gvmz.avif"
-//   ],
-//   "noOfBedRooms": "11",
-//   "rentAmount": "123",
-//   "email" : "kamrul@gmail.com"
-// }
+

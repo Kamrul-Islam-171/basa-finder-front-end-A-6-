@@ -1,9 +1,15 @@
+import RentalListingsComponent from "@/components/modules/commonCompoentns/RentalListingsComponent";
+import { getRentHouseListings } from "@/services/rentHouse";
 
 
-const RentalListingsPage = () => {
+const RentalListingsPage = async() => {
+    // const {data} = await getRentHouseListings();
+    const response = await getRentHouseListings();
+    const listings = response?.data?.result || []; // Ensure it's an array
+    // console.log(data.result)
     return (
         <div>
-            All rental lisgings
+           <RentalListingsComponent data={listings}></RentalListingsComponent>
         </div>
     );
 };

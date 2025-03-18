@@ -26,7 +26,7 @@ const Navbar = () => {
   const pathname = usePathname();
 
   const {user,  setIsLoading} = useUser();
-  console.log(user)
+  // console.log(user)
 
   const handleLogout = () => {
     logout();
