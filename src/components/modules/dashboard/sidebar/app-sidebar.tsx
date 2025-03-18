@@ -25,11 +25,13 @@ import { NavMain } from "./nav-main"
 import { NavUser } from "./nav-user"
 import Link from "next/link"
 import Logo from "@/components/shared/Logo"
+import { useUser } from "@/context/UserContext"
 
-export const userRole = "admin";
+
 
 
 const navData = {
+
   admin: [
     {
       title: "Dashboard",
@@ -64,8 +66,11 @@ const navData = {
       title: "Manage User",
       url: "/landlord/manage-user/all-user",
       icon: Bot,
-      items: [{ title: "Manage All User", url: "/landlord/manage-user/all-user" }],
+      items: [{ title: "Manage All User", url: "/landlord/manage-user/all-user" },
+        { title: "Manage Rental House", url: "/landlord/create-rental-house" }
+      ],
     },
+   
     {
       title: "Settings",
       url: "/landlord/settings",
@@ -144,8 +149,9 @@ const navData = {
 // }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const {user} = useUser();
 
-  const menuItem = navData[userRole] || [];
+  const menuItem = user?.role ?  navData[user?.role] || [] : [];
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>

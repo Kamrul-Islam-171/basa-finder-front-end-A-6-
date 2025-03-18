@@ -18,14 +18,42 @@ import Link from "next/link";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { loginSchema } from "./loginValidation";
 
+import { toast } from "sonner";
+import { useUser } from "@/context/UserContext";
+import { loginUser } from "@/services/auth";
+import { useSearchParams, useRouter } from "next/navigation";
+
+
 const LoginForm = () => {
 
   const form = useForm({
     resolver: zodResolver(loginSchema)
   });
+  const {setIsLoading} = useUser();
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get('redirectPath'); // if there was any redicrect path .
+  const router = useRouter();
 
   const onSubmit : SubmitHandler<FieldValues> = async(data) => {
-    console.log(data)
+    // console.log(data);
+    try {
+      const res = await loginUser(data); 
+      setIsLoading(true) 
+      if (res.success) {
+        toast.success(res?.message);
+        if(redirect) {
+          router.push(redirect)
+        }
+        else {
+          router.push('/')
+        }
+      } else {
+        toast.error(res?.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    
   }
 
   const {

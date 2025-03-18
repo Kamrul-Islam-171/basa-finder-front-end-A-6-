@@ -16,16 +16,32 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Logo from "./Logo";
-import { userRole } from "../modules/dashboard/sidebar/app-sidebar";
+
+import { useUser } from "@/context/UserContext";
+import { logout } from "@/services/auth";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const pathname = usePathname();
 
+  const {user,  setIsLoading} = useUser();
+  console.log(user)
+
+  const handleLogout = () => {
+    logout();
+    setIsLoading(true);
+    // logout korar por check kore dekhbe j amr current path ta private route er under e ki na.
+    // tahole oi page theke kickout kore dibe
+    // if(protectedRoutes.some((route) => pathname.match(route))) {
+    //   router.push('/')
+    // }
+
+  }
+
 
   const routes = [
-    { name: "Dashboard", href: `/${userRole}/dashboard` },
+    { name: "Dashboard", href: `/${user?.role}/dashboard` },
     { name: "Rental Listings", href: "/rental-listings" },
 
     { name: "About", href: "/about" },
@@ -83,7 +99,7 @@ const Navbar = () => {
             >
               <Search className="text-gray-700" size={20} />
             </Button>
-            <Button className="cursor-pointer hidden md:block">Login</Button>
+            { !user && <Link href="/login"><Button  className="cursor-pointer rounded-full hidden md:block">Login</Button></Link> }
             {/* <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden p-2 rounded-full hover:bg-gray-100 transition-colors"
@@ -91,7 +107,7 @@ const Navbar = () => {
               {isMobileMenuOpen ? <X size={25} /> : <Menu size={25} />}
             </button> */}
 
-            <DropdownMenu>
+            { user && <DropdownMenu>
               <DropdownMenuTrigger>
                 <Avatar className="cursor-pointer">
                   <AvatarImage
@@ -112,13 +128,14 @@ const Navbar = () => {
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   className="cursor-pointer"
+                  onClick={handleLogout}
 
                   // onClick={handleLogout}
                 >
                   <LogOut></LogOut> Log Out
                 </DropdownMenuItem>
               </DropdownMenuContent>
-            </DropdownMenu>
+            </DropdownMenu>}
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -153,9 +170,9 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
-          <div className="flex justify-center mt-2">
-            <Button>Login</Button>
-          </div>
+          { !user &&  <div className="flex justify-center mt-2">
+            <Link href="/login"><Button className="cursor-pointer hidden md:block">Login</Button></Link>
+          </div>}
         </motion.div>
       )}
 
