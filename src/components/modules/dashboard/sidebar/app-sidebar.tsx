@@ -30,77 +30,78 @@ import { useUser } from "@/context/UserContext"
 
 
 
-const navData = {
+// const navData = {
 
-  admin: [
-    {
-      title: "Dashboard",
-      url: "/admin/dashboard",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [{ title: "Admin Dashboard", url: "/admin/dashboard" }],
-    },
-    {
-      title: "Manage User",
-      url: "/admin/manage-user/all-user",
-      icon: Bot,
-      items: [{ title: "Manage All User", url: "/admin/manage-user/all-user" }],
-    },
-    {
-      title: "Settings",
-      url: "/admin/settings",
-      icon: Settings2,
-      items: [{ title: "Profile", url: "/profile" }],
-    },
-  ],
+//   admin: [
+//     {
+//       title: "Dashboard",
+//       url: "/admin/dashboard",
+//       icon: SquareTerminal,
+//       isActive: true,
+//       items: [{ title: "Admin Dashboard", url: "/admin/dashboard" }],
+//     },
+//     {
+//       title: "Manage User",
+//       url: "/admin/manage-user/all-user",
+//       icon: Bot,
+//       items: [{ title: "Manage All User", url: "/admin/manage-user/all-user" }],
+//     },
+//     {
+//       title: "Settings",
+//       url: "/admin/settings",
+//       icon: Settings2,
+//       items: [{ title: "Profile", url: "/profile" }],
+//     },
+//   ],
 
-  landlord: [
-    {
-      title: "Dashboard",
-      url: "/landlord/dashboard",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [{ title: "Landlord Dashboard", url: "/landlord/dashboard" }],
-    },
-    {
-      title: "Manage User",
-      url: "/landlord/manage-user/all-user",
-      icon: Bot,
-      items: [{ title: "Manage All User", url: "/landlord/manage-user/all-user" },
-        { title: "Manage Rental House", url: "/landlord/create-rental-house" }
-      ],
-    },
+//   landlord: [
+//     {
+//       title: "Dashboard",
+//       url: "/landlord/dashboard",
+//       icon: SquareTerminal,
+//       isActive: true,
+//       items: [{ title: "Landlord Dashboard", url: "/landlord/dashboard" }],
+//     },
+//     {
+//       title: "Manage User",
+//       url: "/landlord/manage-user/all-user",
+//       icon: Bot,
+//       items: [{ title: "Manage All User", url: "/landlord/manage-user/all-user" },
+//         { title: "Manage Rental House", url: "/landlord/create-rental-house" },
+//         { title: "My Listings", url: "/landlord/my-listings" }
+//       ],
+//     },
    
-    {
-      title: "Settings",
-      url: "/landlord/settings",
-      icon: Settings2,
-      items: [{ title: "Profile", url: "/profile" }],
-    },
-  ],
+//     {
+//       title: "Settings",
+//       url: "/landlord/settings",
+//       icon: Settings2,
+//       items: [{ title: "Profile", url: "/profile" }],
+//     },
+//   ],
 
-  tenant: [
-    {
-      title: "Dashboard",
-      url: "/tenant/dashboard",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [{ title: "Tenant Dashboard", url: "/tenant/dashboard" }],
-    },
-    {
-      title: "Manage Request",
-      url: "/tenant/manage-request/all-rent-requests",
-      icon: Bot,
-      items: [{ title: "My Rent Request ", url: "/tenant/manage-request/all-rent-requests" }],
-    },
-    {
-      title: "Settings",
-      url: "/tenant/settings",
-      icon: Settings2,
-      items: [{ title: "Profile", url: "/profile" }],
-    },
-  ],
-};
+//   tenant: [
+//     {
+//       title: "Dashboard",
+//       url: "/tenant/dashboard",
+//       icon: SquareTerminal,
+//       isActive: true,
+//       items: [{ title: "Tenant Dashboard", url: "/tenant/dashboard" }],
+//     },
+//     {
+//       title: "Manage Request",
+//       url: "/tenant/manage-request/all-rent-requests",
+//       icon: Bot,
+//       items: [{ title: "My Rent Request ", url: "/tenant/manage-request/all-rent-requests" }],
+//     },
+//     {
+//       title: "Settings",
+//       url: "/tenant/settings",
+//       icon: Settings2,
+//       items: [{ title: "Profile", url: "/profile" }],
+//     },
+//   ],
+// };
 
 
 // const data = {
@@ -150,6 +151,79 @@ const navData = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const {user} = useUser();
+
+  const navData = {
+
+    admin: [
+      {
+        title: "Dashboard",
+        url: "/admin/dashboard",
+        icon: SquareTerminal,
+        isActive: true,
+        items: [{ title: "Admin Dashboard", url: "/admin/dashboard" }],
+      },
+      {
+        title: "Manage User",
+        url: "/admin/manage-user/all-user",
+        icon: Bot,
+        items: [{ title: "Manage All User", url: "/admin/manage-user/all-user" }],
+      },
+      {
+        title: "Settings",
+        url: "/admin/settings",
+        icon: Settings2,
+        items: [{ title: "Profile", url: "/profile" }],
+      },
+    ],
+  
+    landlord: [
+      {
+        title: "Dashboard",
+        url: "/landlord/dashboard",
+        icon: SquareTerminal,
+        isActive: true,
+        items: [{ title: "Landlord Dashboard", url: "/landlord/dashboard" }],
+      },
+      {
+        title: "Manage User",
+        url: "/landlord/manage-user/all-user",
+        icon: Bot,
+        items: [{ title: "Manage All User", url: "/landlord/manage-user/all-user" },
+          { title: "Manage Rental House", url: "/landlord/create-rental-house" },
+          { title: "My Listings", url: `/landlord/my-listings` }
+        ],
+      },
+     
+      {
+        title: "Settings",
+        url: "/landlord/settings",
+        icon: Settings2,
+        items: [{ title: "Profile", url: "/profile" }],
+      },
+    ],
+  
+    tenant: [
+      {
+        title: "Dashboard",
+        url: "/tenant/dashboard",
+        icon: SquareTerminal,
+        isActive: true,
+        items: [{ title: "Tenant Dashboard", url: "/tenant/dashboard" }],
+      },
+      {
+        title: "Manage Request",
+        url: "/tenant/manage-request/all-rent-requests",
+        icon: Bot,
+        items: [{ title: "My Rent Request ", url: "/tenant/manage-request/all-rent-requests" }],
+      },
+      {
+        title: "Settings",
+        url: "/tenant/settings",
+        icon: Settings2,
+        items: [{ title: "Profile", url: "/profile" }],
+      },
+    ],
+  };
 
   const menuItem = user?.role ?  navData[user?.role] || [] : [];
   return (

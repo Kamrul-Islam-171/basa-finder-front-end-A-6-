@@ -10,4 +10,10 @@ export interface TRentalHouse {
     createdAt: string;
     updatedAt: string;
   }
+export interface TUpdateRentalHouse {
+   
+    noOfBedRooms: number;
+    rentAmount: number;
+   
+  }
   

@@ -35,7 +35,7 @@ const RentHouseDetails = ({ data }: { data: TRentalHouse }) => {
         ownerEmail : data?.email,
         requestEmail: user?.email,
         ...requestData,
-        status:"pending"
+        // status:"pending"
       }
 
       console.log(rentData)
@@ -50,6 +50,7 @@ const RentHouseDetails = ({ data }: { data: TRentalHouse }) => {
       // }
       
     }
+
   
 
   return (
