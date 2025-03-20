@@ -26,7 +26,7 @@ export const CreateRentHouse = async(houseData : FieldValues) => {
     }
 }
 
-export const getRentHouseListings = async(page?:string, limit?:string, query?:{[key:string]:string|string[]|undefined}) => {
+export const getRentHouseListings = async(page?:string | number, limit?:string | number, query?:{[key:string]:string|string[]|undefined}) => {
     // console.log(userData)
     const params = new URLSearchParams(); // multiple query set korbo
     if(query?.rentAmount) {
@@ -39,6 +39,9 @@ export const getRentHouseListings = async(page?:string, limit?:string, query?:{[
     if(query?.location) {
         params.append("search", query?.location.toString());
     }
+    // if(query?.page) {
+    //     page = query.get('page')
+    // }
     
     
     // console.log(params)
