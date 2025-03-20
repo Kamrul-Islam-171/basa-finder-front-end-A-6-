@@ -52,7 +52,7 @@ export default function CreateRenalForm() {
 
     setUploadedUrls(uploadedImages);
     setIsUploading(false);
-    console.log('Uploaded Image URLs:', uploadedImages);
+    // console.log('Uploaded Image URLs:', uploadedImages);
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {

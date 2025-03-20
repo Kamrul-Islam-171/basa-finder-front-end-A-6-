@@ -1,5 +1,6 @@
 "use server"
 import { jwtDecode } from "jwt-decode";
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
 
@@ -66,3 +67,66 @@ export const getCurrentUser = async() => {
 export const logout = async() => {
     (await cookies()).delete("accessToken");
 }
+
+export const getUserDetails = async(email:string) => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/users/${email}`, {
+            headers: {
+                
+                Authorization: (await cookies()).get("accessToken")!.value,
+            },
+            next: {
+                tags: ["USER"]
+            }
+        });
+        const result = await res.json();
+
+      
+        return result;
+        
+    } catch (error: any) {
+        return Error(error)
+    }
+}
+
+export const changeProfile = async(userData : FieldValues) => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/users/change-profile`, {
+            method:"POST",
+            headers: {
+                'Content-Type' : 'application/json',
+                Authorization: (await cookies()).get("accessToken")!.value,
+            },
+            body: JSON.stringify(userData)
+        });
+        revalidateTag("USER");
+        const result = await res.json();
+        
+        // console.log(result)
+        return result;
+        
+    } catch (error: any) {
+        return Error(error)
+    }
+}
+export const changePassword = async(userData : FieldValues) => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/users/change-password`, {
+            method:"POST",
+            headers: {
+                'Content-Type' : 'application/json',
+                Authorization: (await cookies()).get("accessToken")!.value,
+            },
+            body: JSON.stringify(userData)
+        });
+        revalidateTag("USER");
+        const result = await res.json();
+        
+        // console.log(result)
+        return result;
+        
+    } catch (error: any) {
+        return Error(error)
+    }
+}
+

@@ -24,17 +24,32 @@ import {
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useUser } from "@/context/UserContext";
-import { getMyRentHouseListings, updateSingleRentHouse } from "@/services/rentHouse";
+import {
+  DeleteSingleRentHouse,
+  getMyRentHouseListings,
+  updateSingleRentHouse,
+} from "@/services/rentHouse";
 import { toast } from "sonner";
+import DeleteModal from "../commonCompoentns/DeleteModal";
 
 const RentListings = () => {
   // {data} : {data: TRentalHouse[]}
   const [data, setData] = useState<TRentalHouse[] | []>([]);
   const [refresh, setRefresh] = useState(false);
 
-
-  const [isModalOpen, setIsModalOpen] = useState(false);;
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentHouse, setCurrentHouse] = useState<TRentalHouse | null>(null);
+
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedItem, setSelectedItem] = useState<string | null>(null);
+
+  const handleDelete = (data: TRentalHouse) => {
+    console.log("data = ",data);
+    setSelectedId(data?._id);
+    setSelectedItem(data?.location);
+    setDeleteModalOpen(true);
+  };
 
   const form = useForm();
   const { user } = useUser();
@@ -47,7 +62,7 @@ const RentListings = () => {
     const fetchData = async () => {
       // console.log(user)
       const res = await getMyRentHouseListings(user?.email as string);
-      
+
       setData(res?.data?.result);
       // console.log("singe = ", res)
     };
@@ -106,10 +121,11 @@ const RentListings = () => {
         <button
           className="text-green-500 cursor-pointer"
           title="Update"
-          //   onClick={() => handleDelete(row.original)}
+          // onClick={() => handleDelete(row.original)}
           onClick={() => {
-            setIsModalOpen(true)
-            setCurrentHouse(row.original)
+            setIsModalOpen(true);
+            setCurrentHouse(row.original);
+            // handleDelete(row.original)
           }}
         >
           <Edit className="w-5 h-5" />
@@ -123,7 +139,7 @@ const RentListings = () => {
         <button
           className="text-red-500 cursor-pointer"
           title="Delete"
-            onClick={() => handleDelete(row.original)}
+          onClick={() => handleDelete(row.original)}
         >
           <Trash className="w-5 h-5" />
         </button>
@@ -131,33 +147,53 @@ const RentListings = () => {
     },
   ];
 
+  const handleDeleteConfirm = async () => {
+    try {
+      if (selectedId) {
+        const res = await DeleteSingleRentHouse(selectedId);
+        console.log(res);
+        if (res.success) {
+          toast.success(res.message);
+          setRefresh((prev) => !prev);
+          setDeleteModalOpen(false);
+        } else {
+          toast.error(res.message);
+        }
+      }
+    } catch (err: any) {
+      console.error(err?.message);
+    }
+  };
+
   const onSubmit: SubmitHandler<FieldValues> = async (Data) => {
     if (!currentHouse) return; // Prevent submission if currentHouse is not set
-  
+
     const updateData = {
-      rentAmount: Data.rentAmount ? Number(Data.rentAmount) : currentHouse.rentAmount,
-      noOfBedRooms: Data.noOfBedRooms ? Number(Data.noOfBedRooms) : currentHouse.noOfBedRooms,
+      rentAmount: Data.rentAmount
+        ? Number(Data.rentAmount)
+        : currentHouse.rentAmount,
+      noOfBedRooms: Data.noOfBedRooms
+        ? Number(Data.noOfBedRooms)
+        : currentHouse.noOfBedRooms,
     };
     // console.log(updateData);
     // console.log(currentHouse._id)
     try {
       const res = await updateSingleRentHouse(currentHouse?._id, updateData);
       // console.log(res);
-      if(res?.success) {
+      if (res?.success) {
         toast.success(res.message);
         setRefresh((prev) => !prev);
       }
-      
     } catch (err: any) {
-      toast.error(err?.message)
-      console.log(err)
+      toast.error(err?.message);
+      console.log(err);
     }
   };
 
-  const handleDelete = async(data : TRentalHouse) => {
-    console.log(data)
-  }
-  
+  // const handleDelete = async(data : TRentalHouse) => {
+  //   console.log(data)
+  // }
 
   return (
     <div>
@@ -231,6 +267,13 @@ const RentListings = () => {
           </DialogContent>
         </Dialog>
       </div>
+
+      <DeleteModal
+        name={selectedItem}
+        isOpen={isDeleteModalOpen}
+        onOpenChange={setDeleteModalOpen}
+        onConfirm={handleDeleteConfirm}
+      ></DeleteModal>
     </div>
   );
 };

@@ -16,6 +16,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/modules/dashboard/sidebar/app-sidebar";
+import Breads from "@/components/modules/commonCompoentns/Breads";
 
 
 const DashBoardLayout = ({ children }: { children: ReactNode }) => {
@@ -31,7 +32,7 @@ const DashBoardLayout = ({ children }: { children: ReactNode }) => {
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
                   <BreadcrumbLink href="#">
-                    Dashboard
+                    <Breads></Breads>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />

@@ -26,10 +26,26 @@ export const CreateRentHouse = async(houseData : FieldValues) => {
     }
 }
 
-export const getRentHouseListings = async() => {
+export const getRentHouseListings = async(page?:string, limit?:string, query?:{[key:string]:string|string[]|undefined}) => {
     // console.log(userData)
+    const params = new URLSearchParams(); // multiple query set korbo
+    if(query?.rentAmount) {
+        params.append("minPrice", "0");
+        params.append("maxPrice", query?.rentAmount.toString());
+    }
+    if(query?.noOfBedRooms) {
+        params.append("noOfBedRooms", query?.noOfBedRooms.toString());
+    }
+    if(query?.location) {
+        params.append("search", query?.location.toString());
+    }
+    
+    
+    // console.log(params)
+
+
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/product/get-all-listings`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/product/get-all-listings?page=${page}&limit=${limit}&${params}`, {
             next: {
                 // tags: ["RENTHOUSE"]
                 revalidate: 30
@@ -98,6 +114,26 @@ export const updateSingleRentHouse = async(id:string, updatedData : TUpdateRenta
         const result = await res.json();
 
 
+      
+        return result;
+        
+    } catch (error: any) {
+        return Error(error)
+    }
+}
+export const DeleteSingleRentHouse = async(id:string) => {
+    // console.log(userData)
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/product/${id}`, {
+            method:"DELETE",
+            headers: {
+                Authorization: (await cookies()).get("accessToken")!.value,
+            },
+            
+           
+        });
+        revalidateTag('RENTHOUSE');
+        const result = await res.json();
       
         return result;
         

@@ -170,7 +170,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       },
       {
         title: "Settings",
-        url: "/admin/settings",
+        url: "/profile",
         icon: Settings2,
         items: [{ title: "Profile", url: "/profile" }],
       },
@@ -196,7 +196,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
      
       {
         title: "Settings",
-        url: "/landlord/settings",
+        url: "/profile",
         icon: Settings2,
         items: [{ title: "Profile", url: "/profile" }],
       },
@@ -218,7 +218,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       },
       {
         title: "Settings",
-        url: "/tenant/settings",
+        url: "/profile",
         icon: Settings2,
         items: [{ title: "Profile", url: "/profile" }],
       },

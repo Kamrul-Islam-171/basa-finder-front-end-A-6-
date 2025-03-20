@@ -2,11 +2,19 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { TRentalHouse } from '@/types/rentHouse';
+import FilterSidebar from './FilterSidebar';
 
 const RentalListingsComponent = ({ data } : {data : TRentalHouse[]}) => {
-  console.log(data)
+  // console.log(data)
   return (
-    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 container mx-auto">
+    <div className="container mx-auto flex lg:flex-row  flex-col gap-8 mt-10">
+      <div className='lg:max-w-xs w-full'>
+        {/* sidebar */}
+        <FilterSidebar />
+      </div>
+
+      <div>
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6  ">
       {data.map((house, index) => (
         <div key={index} className=" rounded-lg overflow-hidden shadow-lg bg-white">
           {/* Image section */}
@@ -38,6 +46,9 @@ const RentalListingsComponent = ({ data } : {data : TRentalHouse[]}) => {
           </div>
         </div>
       ))}
+    </div>
+      </div>
+
     </div>
   );
 };
