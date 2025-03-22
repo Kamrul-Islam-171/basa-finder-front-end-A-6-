@@ -25,6 +25,26 @@ export const CreateRentHouse = async(houseData : FieldValues) => {
         return Error(error)
     }
 }
+export const CreateRentRequest = async(houseData : FieldValues) => {
+    // console.log(userData)
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/rentRequest/rent-request`, {
+            method:"POST",
+            headers: {
+                'Content-Type' : 'application/json',
+                Authorization: (await cookies()).get("accessToken")!.value,
+            },
+            body: JSON.stringify(houseData)
+        });
+        const result = await res.json();
+
+      
+        return result;
+        
+    } catch (error: any) {
+        return Error(error)
+    }
+}
 
 export const getRentHouseListings = async(page?:string | number, limit?:string | number, query?:{[key:string]:string|string[]|undefined}) => {
     // console.log(userData)
@@ -50,7 +70,7 @@ export const getRentHouseListings = async(page?:string | number, limit?:string |
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/product/get-all-listings?page=${page}&limit=${limit}&${params}`, {
             next: {
-                // tags: ["RENTHOUSE"]
+                tags: ["RENTHOUSE"],
                 revalidate: 30
             }
         });
@@ -137,6 +157,70 @@ export const DeleteSingleRentHouse = async(id:string) => {
         });
         revalidateTag('RENTHOUSE');
         const result = await res.json();
+      
+        return result;
+        
+    } catch (error: any) {
+        return Error(error)
+    }
+}
+
+export const getMyRentRequests = async() => {
+    // console.log(userData)
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/rentRequest/rent-request`, {
+            headers: {
+                
+                Authorization: (await cookies()).get("accessToken")!.value,
+            },
+            // next: {
+            //     tags: ["RENTHOUSE"]
+            // }
+        });
+        const result = await res.json();
+
+      
+        return result;
+        
+    } catch (error: any) {
+        return Error(error)
+    }
+}
+export const getSingleRentRequests = async(id:string) => {
+    // console.log(userData)
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/rentRequest/rent-request/${id}`, {
+            headers: {
+                
+                Authorization: (await cookies()).get("accessToken")!.value,
+            },
+            // next: {
+            //     tags: ["RENTHOUSE"]
+            // }
+        });
+        const result = await res.json();
+
+      
+        return result;
+        
+    } catch (error: any) {
+        return Error(error)
+    }
+}
+
+export const CreatePayment = async(houseData : FieldValues) => {
+    // console.log(userData)
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/orders/create-payment`, {
+            method:"POST",
+            headers: {
+                'Content-Type' : 'application/json',
+                Authorization: (await cookies()).get("accessToken")!.value,
+            },
+            body: JSON.stringify(houseData)
+        });
+        const result = await res.json();
+
       
         return result;
         

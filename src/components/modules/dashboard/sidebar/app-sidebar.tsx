@@ -166,7 +166,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         title: "Manage User",
         url: "/admin/manage-user/all-user",
         icon: Bot,
-        items: [{ title: "Manage All User", url: "/admin/manage-user/all-user" }],
+        items: [
+          { title: "Manage All User", url: "/admin/manage-user/all-user" },
+          { title: "Manage  Listings", url: "/admin/all-listings" }
+        ],
       },
       {
         title: "Settings",
@@ -212,9 +215,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       },
       {
         title: "Manage Request",
-        url: "/tenant/manage-request/all-rent-requests",
+        url: "/tenant/all-rent-requests",
         icon: Bot,
-        items: [{ title: "My Rent Request ", url: "/tenant/manage-request/all-rent-requests" }],
+        items: [{ title: "My Rent Request ", url: "/tenant/all-rent-requests" }],
       },
       {
         title: "Settings",

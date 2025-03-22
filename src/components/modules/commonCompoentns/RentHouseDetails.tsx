@@ -14,6 +14,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useUser } from "@/context/UserContext";
+import { CreateRentRequest } from "@/services/rentHouse";
+import { toast } from "sonner";
 
 const RentHouseDetails = ({ data }: { data: TRentalHouse }) => {
   // console.log(data);
@@ -38,16 +40,24 @@ const RentHouseDetails = ({ data }: { data: TRentalHouse }) => {
         // status:"pending"
       }
 
-      console.log(rentData)
+      // console.log(rentData)
 
       // {
       //   ownerEmail, requestEmail, ...data, status:pending
       // }
-      // try {
+      try {
+        const res = await CreateRentRequest(rentData);
+        if(res?.success) {
+          toast.success(res?.message);
+        }
+        else {
+          toast.error(res?.message)
+        }
         
-      // } catch (error) {
-      //   console.error(error);
-      // }
+      } catch (error : any) {
+        console.error(error);
+        toast.error(error?.message)
+      }
       
     }
 
@@ -163,7 +173,7 @@ const RentHouseDetails = ({ data }: { data: TRentalHouse }) => {
               <FormItem>
                 <FormLabel className="font-semibold">Duration</FormLabel>
                 <FormControl>
-                  <Input type="text" required={true} {...field} value={field.value || ""} placeholder="Rental Duration (e.g., 5 days, 6 months, 1 year)" />
+                  <Input type="text" required={true} {...field} value={field.value || ""} placeholder="Rental Duration (e.g., 5 days, 2 weeks)" />
                 </FormControl>
                
                 <FormMessage className="text-red-500" />

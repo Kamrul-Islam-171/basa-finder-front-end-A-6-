@@ -8,13 +8,13 @@ const AllUserPage = async({searchParams} : {searchParams : TSearchParams}) => {
     
    
     const page = query?.page;
-    console.log(query)
+    // console.log(query)
     // const page = Array.isArray(query?.page) ? query.page[0] : query?.page;
     
    
     const pageNumber = page ? parseInt(page, 6) : 1;
     const res = await getAllUsers(pageNumber, 5);
-    console.log(res);
+    // console.log(res);
     const userData = res?.data?.result || [];
     const totalpage = res?.data?.meta?.totalPage;
     return (

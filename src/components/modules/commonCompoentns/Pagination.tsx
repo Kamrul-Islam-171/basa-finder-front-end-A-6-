@@ -1,18 +1,30 @@
 "use client"
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-import { useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams  } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 
 const Pagination = ({ totalPage }: { totalPage: number }) => {
-  const [currentPage, setCurrentPage] = useState(1);
   //   console.log(currentPage);
-
+  
   // current page onujai query params set kora lagbe
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  
+  const initialPage = Number(searchParams.get("page")) || 1;
+  const [currentPage, setCurrentPage] = useState(initialPage);
+  // console.log(currentPage)
+
+  useEffect(() =>{
+    // if (currentPage !== initialPage) {
+    //   router.push(`${pathname}?page=${currentPage}`);
+    // }
+    // reload dile query teo page = 1 set hobe
+    router.push(`${pathname}?page=${currentPage}`)
+  }, [currentPage, , pathname, router])
 
   const handlePrev = () => {
     if (currentPage > 1) {
