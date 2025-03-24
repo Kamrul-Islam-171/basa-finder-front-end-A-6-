@@ -16,10 +16,10 @@ export const middleware = async(request:NextRequest) => {
     // console.log(pathname)
 
     const userInfo = await getCurrentUser();
-    console.log("user = ",userInfo)
+    // console.log("user = ",userInfo)
 
     if(!userInfo) {
-        console.log("i am in")
+        // console.log("i am in")
         if(authRoutes.includes(pathname)) {
             //if i want to go login and reg page. tokhon atkabo na
             return NextResponse.next();
@@ -54,6 +54,7 @@ export const config = {
       "/landlord",
       "/landlord/:page",
       "/tenant",
-      "/tenant/:page"
+      "/tenant/:page",
+     "/tenant/send-request/:id", 
     ], 
   };

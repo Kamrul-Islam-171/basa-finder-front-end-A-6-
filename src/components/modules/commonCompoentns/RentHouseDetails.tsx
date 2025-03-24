@@ -17,6 +17,7 @@ import { useUser } from "@/context/UserContext";
 import { CreateRentRequest } from "@/services/rentHouse";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const RentHouseDetails = ({ data }: { data: TRentalHouse }) => {
   // console.log(data);
@@ -104,7 +105,10 @@ const RentHouseDetails = ({ data }: { data: TRentalHouse }) => {
 
         {/* Property Details */}
         <div className="space-y-6">
+          <div className="flex justify-between">
           <h1 className="text-3xl font-bold text-gray-900">{data?.location}</h1>
+          <Button><Link href={`/tenant/send-request/${data?._id}`}>Rent</Link></Button>
+          </div>
           <p className="text-gray-600 text-lg">{data?.description}</p>
 
           {/* Rent and Bedrooms */}

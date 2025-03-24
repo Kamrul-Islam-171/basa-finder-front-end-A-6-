@@ -30,7 +30,7 @@ const RentalListingsComponent = ({
               {/* Image section */}
               <div className="relative w-full h-64">
                 <Image
-                  src={house.imageUrls[0]}
+                  src={house?.imageUrls[0] || 'https://res.cloudinary.com/dtp5fwvg9/image/upload/v1742374205/vdxvmefjbpwagsqhdric.jpg'}
                   alt="Rental House"
                   layout="fill"
                   objectFit="cover"
@@ -41,23 +41,23 @@ const RentalListingsComponent = ({
               {/* Card content */}
               <div className="p-4">
                 <h2 className="text-xl font-semibold text-gray-800">
-                  {house.location}
+                  {house?.location}
                 </h2>
                 <p className="text-sm text-gray-600 mt-2">
-                  {house.description}
+                  {house?.description}
                 </p>
 
                 <div className="mt-4 flex justify-between items-center">
                   <span className="text-lg font-bold text-gray-900">
-                    {house.rentAmount} Tk
+                    {house?.rentAmount} Tk
                   </span>
                   <span className="text-sm text-gray-600">
-                    {house.noOfBedRooms} Bedrooms
+                    {house?.noOfBedRooms} Bedrooms
                   </span>
                 </div>
 
                 <div className="mt-4">
-                  <Link href={`/rental-listings/${house._id}`}>
+                  <Link href={`/rental-listings/${house?._id}`}>
                     <Button className="cursor-pointer">View Details</Button>
                   </Link>
                 </div>
