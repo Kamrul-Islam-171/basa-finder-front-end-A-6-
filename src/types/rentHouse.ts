@@ -16,6 +16,12 @@ export interface TUpdateRentalHouse {
     rentAmount: number;
    
   }
+export interface TUpdateRentalStatus {
+   
+    status: string;
+    id:string;
+   
+  }
   
 
 // export interface TRentalRequest {

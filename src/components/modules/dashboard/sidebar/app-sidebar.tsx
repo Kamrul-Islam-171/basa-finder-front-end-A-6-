@@ -188,10 +188,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         items: [{ title: "Landlord Dashboard", url: "/landlord/dashboard" }],
       },
       {
-        title: "Manage User",
-        url: "/landlord/manage-user/all-user",
+        title: "Manage Rent Listing",
+        url: "/landlord/manage-rent-request",
         icon: Bot,
-        items: [{ title: "Manage All User", url: "/landlord/manage-user/all-user" },
+        items: [{ title: "Manage Request", url: "/landlord/manage-rent-request" },
           { title: "Manage Rental House", url: "/landlord/create-rental-house" },
           { title: "My Listings", url: `/landlord/my-listings` }
         ],

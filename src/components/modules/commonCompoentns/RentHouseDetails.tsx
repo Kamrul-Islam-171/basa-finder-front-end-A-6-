@@ -16,6 +16,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useUser } from "@/context/UserContext";
 import { CreateRentRequest } from "@/services/rentHouse";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const RentHouseDetails = ({ data }: { data: TRentalHouse }) => {
   // console.log(data);
@@ -23,6 +24,7 @@ const RentHouseDetails = ({ data }: { data: TRentalHouse }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const form = useForm();
   const {user} = useUser();
+  const router = useRouter();
 
   const {
     formState: {isSubmitting},
@@ -130,9 +132,11 @@ const RentHouseDetails = ({ data }: { data: TRentalHouse }) => {
             {/* <Button className="w-full flex items-center gap-2 text-lg">
               <Mail className="w-5 h-5" /> Contact Owner
             </Button> */}
-            <Button className="w-full cursor-pointer text-white" onClick={() => setIsModalOpen(true)}>
+            {user ? <Button  className="w-full cursor-pointer text-white" onClick={() => setIsModalOpen(true)}>
               Request Rental
-            </Button>
+            </Button> : <Button  className="w-full cursor-pointer text-white" onClick ={() => {router.push('/login')}}>
+              For Rent Request Login First
+            </Button>}
           </div>
         </div>
       </div>

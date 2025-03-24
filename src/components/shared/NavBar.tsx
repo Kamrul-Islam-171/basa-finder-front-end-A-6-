@@ -19,6 +19,9 @@ import Logo from "./Logo";
 
 import { useUser } from "@/context/UserContext";
 import { logout } from "@/services/auth";
+import Headroom from "react-headroom";
+
+
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -41,14 +44,16 @@ const Navbar = () => {
 
 
   const routes = [
-    { name: "Dashboard", href: `/${user?.role}/dashboard` },
+    // { name: "Dashboard", href: `/${user?.role}/dashboard` },
     { name: "Rental Listings", href: "/rental-listings" },
 
     { name: "About", href: "/about" },
   ];
 
   return (
-    <nav className="bg-white shadow-md w-full z-50">
+    <Headroom>
+      
+      <nav className="bg-white shadow-md w-full z-50">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
@@ -121,10 +126,10 @@ const Navbar = () => {
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="cursor-pointer">
-                  Profile
+                  <Link href={`/profile`}>Profile</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="cursor-pointer">
-                  Dashboard
+                  <Link href={`/${user?.role}/dashboard`}>Dashboard</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   className="cursor-pointer"
@@ -171,8 +176,9 @@ const Navbar = () => {
             ))}
           </div>
           { !user &&  <div className="flex justify-center mt-2">
-            <Link href="/login"><Button className="cursor-pointer hidden md:block">Login</Button></Link>
+            <Link href="/login"><Button className="cursor-pointer ">Login</Button></Link>
           </div>}
+          
         </motion.div>
       )}
 
@@ -201,6 +207,7 @@ const Navbar = () => {
         </motion.div>
       )}
     </nav>
+    </Headroom>
   );
 };
 
