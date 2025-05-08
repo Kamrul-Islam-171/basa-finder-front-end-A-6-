@@ -121,6 +121,23 @@ export const getSingleRentHouse = async(id:string) => {
         return Error(error)
     }
 }
+export const getRentHouseReqestAll = async() => {
+    // console.log(userData)
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/rentRequest/get-all-rent-request`, {
+            next: {
+                tags: ["RENTHOUSE"]
+            }
+        });
+        const result = await res.json();
+
+      
+        return result;
+        
+    } catch (error: any) {
+        return Error(error)
+    }
+}
 export const updateSingleRentHouse = async(id:string, updatedData : TUpdateRentalHouse) => {
     // console.log(userData)
     try {
@@ -188,7 +205,7 @@ export const DeleteSingleRentHouse = async(id:string) => {
     }
 }
 
-export const getAllRentRequestsForLandLord = async(page:string|number, limit:string|number) => {
+export const getAllRentRequestsForLandLord = async(page?:string|number, limit?:string|number) => {
     // console.log(userData)
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/rentRequest/all-rent-request?page=${page}&limit=${limit}`, {
