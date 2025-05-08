@@ -1,7 +1,14 @@
 
 import RentRequestForm from "@/components/modules/tenant/RentRequestForm";
-import { getSingleRentHouse } from "@/services/rentHouse";
+import { getRentHouseListings, getSingleRentHouse } from "@/services/rentHouse";
 
+export async function generateStaticParams() {
+    const houses = await getRentHouseListings(undefined, undefined, undefined);
+    // console.log(house)
+    return houses?.data?.result.map((house:{_id:string}) => ({
+        id:house?._id,
+    })) || []
+}
 
 const SendRentRequestPage = async({params}: {params:Promise<{id:string}>}) => {
     const {id} = await params;
