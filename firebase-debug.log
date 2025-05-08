@@ -1,0 +1,25 @@
+[debug] [2025-03-25T07:18:50.771Z] ----------------------------------------------------------------------
+[debug] [2025-03-25T07:18:50.772Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\USER\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-03-25T07:18:50.773Z] CLI Version:   13.7.0
+[debug] [2025-03-25T07:18:50.773Z] Platform:      win32
+[debug] [2025-03-25T07:18:50.773Z] Node Version:  v18.20.5
+[debug] [2025-03-25T07:18:50.776Z] Time:          Tue Mar 25 2025 13:18:50 GMT+0600 (Bangladesh Standard Time)
+[debug] [2025-03-25T07:18:50.776Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-03-25T07:18:50.817Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-03-25T07:18:50.818Z] > authorizing via signed-in user (kamrul.ruet.171@gmail.com)
+[debug] [2025-03-25T07:18:50.818Z] [iam] checking project basa-finder for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-03-25T07:18:50.819Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/basa-finder:testIamPermissions [none]
+[debug] [2025-03-25T07:18:50.819Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/basa-finder:testIamPermissions x-goog-quota-user=projects/basa-finder
+[debug] [2025-03-25T07:18:50.819Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/basa-finder:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-03-25T07:18:52.508Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/basa-finder:testIamPermissions 200
+[debug] [2025-03-25T07:18:52.508Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/basa-finder:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-03-25T07:18:52.508Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/basa-finder [none]
+[debug] [2025-03-25T07:18:53.172Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/basa-finder 200
+[debug] [2025-03-25T07:18:53.172Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/basa-finder {"projectId":"basa-finder","projectNumber":"981081983582","displayName":"basa-finder","name":"projects/basa-finder","resources":{"hostingSite":"basa-finder"},"state":"ACTIVE","etag":"1_902f5646-093d-439d-b70b-8d01b55f20a9"}
+[info] 
+[info] === Deploying to 'basa-finder'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2025-03-25T07:18:53.176Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/basa-finder/versions [none]
+[debug] [2025-03-25T07:18:53.176Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/basa-finder/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
